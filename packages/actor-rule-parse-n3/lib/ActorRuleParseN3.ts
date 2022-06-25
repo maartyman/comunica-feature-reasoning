@@ -30,7 +30,6 @@ export class ActorRuleParseN3 extends ActorRuleParseFixedMediaTypes {
   public readonly mediatorRdfParse: MediatorRdfParseHandle;
 
   /**
-   * TODO: Check this
    * @param args -
    *   \ @defaultNested {{
    *       "application/n-quads": 1.0,
@@ -51,16 +50,31 @@ export class ActorRuleParseN3 extends ActorRuleParseFixedMediaTypes {
     super(args);
   }
 
+  // TODO: See if this handle can be removed.
   public async testHandle(action: IActionRuleParse, mediaType: string, context: IActionContext): Promise<IActorTest> {
-    return this.mediatorRdfParse.publish({
+    const replies = this.mediatorRdfParse.publish({
       handle: action,
       context,
       handleMediaType: mediaType,
-    });
+    }).map(({ reply }) => reply);
+
+    for (const reply of replies) {
+      try {
+        // See if there is at least one non-rejecting actor
+        await reply;
+        return true;
+      } catch (e) {
+        // This actor does not support the required parsing operation
+      }
+    }
+
+    // TODO: Improve error
+    throw new Error(`${this.name} does not support ${action}`)
   }
 
   public async runHandle(action: IActionRuleParse, mediaType: string, context: ActionContext):
   Promise<IActorRuleParseOutput> {
+    console.log('run handle called')
     const { handle } = await this.mediatorRdfParse.mediate({
       handle: action,
       context,
