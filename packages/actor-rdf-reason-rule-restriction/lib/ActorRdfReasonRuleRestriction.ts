@@ -27,6 +27,8 @@ export class ActorRdfReasonRuleRestriction extends ActorRdfReasonMediated {
   }
 
   public async execute(action: IActionRdfReasonExecute): Promise<void> {
+    // eslint-disable-next-line no-console
+    console.log('execute ActorRdfReasonRuleRestriction');
     const { context, rules } = action;
     const store = new Store();
     let size = 0;

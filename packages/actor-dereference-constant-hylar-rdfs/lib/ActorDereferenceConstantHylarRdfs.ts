@@ -14,7 +14,11 @@ export class ActorDereferenceConstantHylarRdfs extends ActorDereference {
   }
 
   public async test(action: IActionDereference): Promise<IActorTest> {
+    // eslint-disable-next-line no-console
+    console.log(`maarten rdfs: ${action.url}`);
     if (action.url === KeysRdfDereferenceConstantHylar.rdfs) {
+      // eslint-disable-next-line no-console
+      console.log(`maarten: true`);
       return true;
     }
     throw new Error(`This actor requires the url to be set to the constant ${KeysRdfDereferenceConstantHylar.rdfs}`);
@@ -45,4 +49,5 @@ const data = `
 (?uuu rdfs:subClassOf ?vvv) ^ (?vvv rdfs:subClassOf ?xxx) -> (?uuu rdfs:subClassOf ?xxx)
 (?uuu rdf:type rdfs:ContainerMembershipProperty) -> (?uuu rdfs:subPropertyOf rdfs:member)
 (?uuu rdf:type rdfs:Datatype) -> (?uuu rdfs:subClassOf rdfs:Literal)
+(?s rdf:type http://xmlns.com/foaf/0.1/Person) -> (?s rdf:type https://schema.org/Person)
 `;
