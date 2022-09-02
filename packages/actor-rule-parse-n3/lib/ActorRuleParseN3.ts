@@ -52,9 +52,6 @@ export class ActorRuleParseN3 extends ActorRuleParseFixedMediaTypes {
 
   public async runHandle(action: IActionRuleParse, mediaType: string, context: ActionContext):
   Promise<IActorRuleParseOutput> {
-    // eslint-disable-next-line no-console
-    console.log('parsing N3');
-
     const { handle } = await this.mediatorRdfParse.mediate({
       handle: action,
       context,

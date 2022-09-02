@@ -35,8 +35,6 @@ export class ActorRuleParseHylar extends ActorRuleParseFixedMediaTypes {
 
   public async runHandle(action: IActionRuleParse, mediaType: string, context: IActionContext):
   Promise<IActorRuleParseOutput> {
-    // eslint-disable-next-line no-console
-    console.log('parsing hylar');
     let buffer = '';
 
     // TODO: Make this a module of its own right

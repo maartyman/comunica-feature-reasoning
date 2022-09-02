@@ -28,7 +28,7 @@ After installing, this package can be added to your engine's configuration as fo
     ...
     {
       "@id": "urn:comunica:default:dereference/actors#n3-string",
-      "@type": "ActorDereferenceN3String"
+      "@type": "ActorDereferenceN3Http"
     }
   ]
 }
